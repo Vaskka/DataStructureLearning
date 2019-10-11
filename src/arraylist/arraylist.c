@@ -12,7 +12,7 @@
 ArrayList* createList(int initSize) {
     
     if (initSize <= 0) {
-        initSize = 64;
+        initSize = DEFAULT_INIT_SIZE;
     }
     
     ArrayList* list;

@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include "../common/struct_common.h"
 
+#define DEFAULT_INIT_SIZE 64
 #define MAX_SIZE 65536
 #define EACH_APPEND_SIZE 1024
 
