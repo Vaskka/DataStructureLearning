@@ -104,6 +104,14 @@ int getSize(const ArrayList* list) {
     return list->size;
 }
 
+// 销毁一个list
+void destory(ArrayList* list) {
+    // 释放内部数组
+    free(list->innerArray);
+    
+    // 释放本身
+    free(list);
+}
 
 // 内部检查扩展空间
 void _extendSize(ArrayList* list) {

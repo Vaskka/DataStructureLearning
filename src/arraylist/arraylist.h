@@ -52,6 +52,9 @@ void* get(const ArrayList* list, int index);
 // 获取真实大小
 int getSize(const ArrayList* list);
 
+// 销毁一个list
+void destory(ArrayList* list);
+
 // 内部检查扩展空间
 void _extendSize(ArrayList* list);
 

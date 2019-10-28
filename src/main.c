@@ -42,7 +42,7 @@ int main(int argc, const char * argv[]) {
     
     printf("%d\n", list->size);
     printf("%d\n", list->count);
-
+    destory(list);
     
     return 0;
 }
