@@ -8,6 +8,43 @@
 
 #include "arraylist.h"
 
+
+// 内部检查扩展空间
+void _extendSize(ArrayList* list) {
+    if (list->count == list->size) {
+       // max memery
+       if (list->count >= MAX_SIZE) {
+           char error_msg[64];
+           
+           sprintf(error_msg, "out of max size: %d", list->count);
+           raise_error(error_msg);
+           
+           return;
+       }
+       
+       // append size
+        if ((list->count + EACH_APPEND_SIZE) > MAX_SIZE) {
+            list->count = MAX_SIZE;
+        }
+        else {
+            list->count = list->count + EACH_APPEND_SIZE;
+        }
+       
+       // append size
+       void** newList = malloc(sizeof(void*) * list->count);
+       
+       // copy original
+       for (int i = 0; i < list->size; i++) {
+           *(newList + i) = *(list->innerArray + i);
+       }
+    
+        free(list->innerArray);
+        list->innerArray = newList;
+           
+    }
+}
+
+
 // 创建一个list
 ArrayList* createList(int initSize) {
     
@@ -113,37 +150,4 @@ void destory(ArrayList* list) {
     free(list);
 }
 
-// 内部检查扩展空间
-void _extendSize(ArrayList* list) {
-    if (list->count == list->size) {
-       // max memery
-       if (list->count >= MAX_SIZE) {
-           char error_msg[64];
-           
-           sprintf(error_msg, "out of max size: %d", list->count);
-           raise_error(error_msg);
-           
-           return;
-       }
-       
-       // append size
-        if ((list->count + EACH_APPEND_SIZE) > MAX_SIZE) {
-            list->count = MAX_SIZE;
-        }
-        else {
-            list->count = list->count + EACH_APPEND_SIZE;
-        }
-       
-       // append size
-       void** newList = malloc(sizeof(void*) * list->count);
-       
-       // copy original
-       for (int i = 0; i < list->size; i++) {
-           *(newList + i) = *(list->innerArray + i);
-       }
-    
-        free(list->innerArray);
-        list->innerArray = newList;
-           
-    }
-}
+
