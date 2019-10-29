@@ -6,6 +6,8 @@
 *.s
 *.gch
 *.so
+*.dylib
+*.a
 
 # cmake and makefile
 cmake_install.cmake

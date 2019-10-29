@@ -2,13 +2,13 @@
 
 ## ArrayList
 
-> 计划实现一种类范型的、可自动增长的list结构。
+> 类范型的、可自动增长的list结构。
 > 
 > 实现：src/arraylist
 
 ### 结构属性
 
-```c
+```cpp
 #define DEFAULT_INIT_SIZE 64
 #define MAX_SIZE 65536
 #define EACH_APPEND_SIZE 1024

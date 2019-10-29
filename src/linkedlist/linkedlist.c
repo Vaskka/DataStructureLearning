@@ -60,12 +60,12 @@ void addFirst(LinkedList* list, void* ele) {
 
 }
 
-// 获取头部第一个元素的引用，相当于队列的peek
+// 获取头部第一个元素的引用
 void* getFirst(const LinkedList* list) {
     return list->head->value;
 }
 
-// 获取尾部第一个元素的引用，相当于栈的peek
+// 获取尾部第一个元素的引用
 void* getLast(const LinkedList* list) {
     return list->tail->value;
 }

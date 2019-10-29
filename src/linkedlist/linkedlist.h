@@ -43,10 +43,10 @@ void addLast(LinkedList* list, void* ele);
 // 增加一个element在首部
 void addFirst(LinkedList* list, void* ele);
 
-// 获取头部第一个元素的引用，相当于队列的peek
+// 获取头部第一个元素的引用
 void* getFirst(const LinkedList* list);
 
-// 获取尾部第一个元素的引用，相当于栈的peek
+// 获取尾部第一个元素的引用
 void* getLast(const LinkedList* list);
 
 // 插入一个element
