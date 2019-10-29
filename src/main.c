@@ -6,42 +6,42 @@
 //  Copyright © 2019 Vaskka. All rights reserved.
 //
 
+
+#include "linkedlist/linkedlist.h"
+
 #include <stdio.h>
-
-#include "arraylist/arraylist.h"
-
-
 struct A {
-    int * a;
+    int a;
     char* s;
 };
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    
-    ArrayList * list = createList(0);
 
-    
-    for (int i = 0 ; i < 2048; i++) {
-        struct A a;
-        a.a = malloc(sizeof(int) * 3);
-        a.a[0] = 2;
-        a.a[1] = 3;
-        a.a[2] = 4;
+    LinkedList * list = createList();
+
+
+    for (int i = 0 ; i < 3; i++) {
+        int a = i;
+        /*
+        a.a = i;
+
         a.s = "hhh";
-        insert(list, 0, (void*)&a);
+        */
+        addFirst(list, (void*)&a);
     }
     
-    removeIndexElement(list, 20);
-    
-    
-    for (int i = 0 ; i < getSize(list); i++) {
-        printf("%d:%s\n", i, ((struct A *)get(list, i))->s);
-    }
-    
+    // while (getSize(list)) {
+    //    int curr = *((int*) getLast(list));
+    //     printf("%d\n", curr);
+    //     removeLastElement(list);
+    // }
+
+    printf("%d\n\n", *(int*)(list->head->value));
+        printf("%d\n\n", *(int*)(list->head->nextPointer->value));
+            printf("%d\n\n", *(int*)(list->head->nextPointer->nextPointer->value));
     
     printf("%d\n", list->size);
-    printf("%d\n", list->count);
     destory(list);
     
     return 0;

@@ -2,15 +2,13 @@
 //  arraylist.h
 //  arraylist
 //
-//  Created by 曹志铭 on 2019/10/10.
+//  Created by Vaskka on 2019/10/10.
 //  Copyright © 2019 Vaskka. All rights reserved.
 //
 
 #ifndef arraylist_h
 #define arraylist_h
 
-#include <stdio.h>
-#include <stdlib.h>
 #include "../common/struct_common.h"
 
 #define DEFAULT_INIT_SIZE 64

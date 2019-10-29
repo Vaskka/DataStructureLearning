@@ -10,6 +10,7 @@
 #define struct_common_h
 
 #include <stdio.h>
+#include <stdlib.h>
 
 // 异常处理
 void raise_error(char* error_msg);
