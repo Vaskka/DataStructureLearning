@@ -154,7 +154,7 @@ void llRemoveFirstElement(LinkedList* list) {
         return;
     }
 
-    LinkedListItem* orginalHead = list->head->nextPointer;
+    LinkedListItem* orginalHead = list->head;
     list->head = list->head->nextPointer;
     free(orginalHead);
 
@@ -179,6 +179,38 @@ void llRemoveLastElement(LinkedList* list) {
         list->head = list->tail = NULL;
     }
 }
+
+
+// 删除指定e位置的元素
+void llRemoveIndexElement(LinkedList* list, int index) {
+    
+    if (index < 0 || index >= list->size) {
+        raise_error("LinkedList remove: index out of range.");
+        return;
+    }
+    
+    if (index == 0) {
+        llRemoveFirstElement(list);
+        return;
+    }
+    
+    LinkedListItem* temp = list->head;
+    
+    for (int i = 0; i < index; i++) {
+        temp = temp->nextPointer;
+    }
+    
+    LinkedListItem* usedPreNode = temp->prePointer;
+    usedPreNode->nextPointer = temp->nextPointer;
+    temp->nextPointer->prePointer = usedPreNode;
+    free(temp);
+    list->size--;
+    if (list->size == 0) {
+        list->head = list->tail = NULL;
+    }
+
+}
+
 
 // 获取第index的ele, index < 0 等效于 index == 0, index >= size 等效于 index == size
 void* llGet(const LinkedList* list, int index) {

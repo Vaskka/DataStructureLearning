@@ -79,6 +79,9 @@ void llRemoveFirstElement(LinkedList* list);
 // 删除尾部第一个element（不会回收内部用户数据所分配的内存，只会回收节点的内存，使用时需要注意内存泄漏问题）
 void llRemoveLastElement(LinkedList* list);
 
+// 删除指定e位置的元素
+void llRemoveIndexElement(LinkedList* list, int index);
+
 // 获取第index的ele, index < 0 等效于 index == 0, index >= size 等效于 index == size
 void* llGet(const LinkedList* list, int index);
 
