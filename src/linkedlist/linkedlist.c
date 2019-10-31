@@ -153,11 +153,25 @@ void llRemoveFirstElement(LinkedList* list) {
     if (list->size == 0) {
         return;
     }
+    
+    if (list->size == 1) {
+        free(list->head);
+        list->head = list->tail = NULL;
+        list->size--;
+        return;
+    }
 
     LinkedListItem* orginalHead = list->head;
+    
+    // 更新head
     list->head = list->head->nextPointer;
+    list->head->prePointer = NULL;
+    
+    // 释放内存
+    orginalHead->nextPointer = NULL;
     free(orginalHead);
 
+    // 处理size
     list->size--;
     if (list->size == 0) {
         list->head = list->tail = NULL;
@@ -169,15 +183,26 @@ void llRemoveLastElement(LinkedList* list) {
     if (list->size == 0) {
         return;
     }
+    
+    if (list->size == 1) {
+        free(list->tail);
+        list->head = list->tail = NULL;
+        list->size--;
+        return;
+    }
 
     LinkedListItem* newTail = list->tail->prePointer;
+    
+    // 释放内存
     free(list->tail);
+    
+    // 更新tail
     list->tail = newTail;
-
+    list->tail->nextPointer = NULL;
+    
+    // 处理size
     list->size--;
-    if (list->size == 0) {
-        list->head = list->tail = NULL;
-    }
+
 }
 
 
@@ -191,6 +216,11 @@ void llRemoveIndexElement(LinkedList* list, int index) {
     
     if (index == 0) {
         llRemoveFirstElement(list);
+        return;
+    }
+    
+    if (index == list->size - 1) {
+        llRemoveLastElement(list);
         return;
     }
     
