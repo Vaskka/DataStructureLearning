@@ -31,7 +31,7 @@ typedef struct ArrayList {
 
 ```c
 // 创建一个list
-ArrayList* createList(int initSize);
+ArrayList* alCreateList(int initSize);
 ```
 
 #### 描述
@@ -46,7 +46,7 @@ ArrayList* createList(int initSize);
 
 ```c
 // 增加一个element
-void add(ArrayList* list, void* ele);
+void alAdd(ArrayList* list, void* ele);
 ```
 
 #### 描述
@@ -62,7 +62,7 @@ void add(ArrayList* list, void* ele);
 
 ```c
 // 插入一个element
-void insert(ArrayList* list, int index, void* ele);
+void alInsert(ArrayList* list, int index, void* ele);
 ```
 
 #### 描述
@@ -81,7 +81,7 @@ void insert(ArrayList* list, int index, void* ele);
 
 ```c
 // 删除index位置的element（不会回收remove的地址所分配的内存，使用时需要注意内存泄漏问题）
-void removeIndexElement(ArrayList* list, int index);
+void alRemoveIndexElement(ArrayList* list, int index);
 ```
 
 #### 描述
@@ -99,7 +99,7 @@ void removeIndexElement(ArrayList* list, int index);
 
 ```c
 // 删除搜索到的第一个element（不会回收remove的地址所分配的内存，使用时需要注意内存泄漏问题）
-void removeElement(ArrayList* list, void* ele);
+void alRemoveElement(ArrayList* list, void* ele);
 ```
 
 #### 描述
@@ -115,7 +115,7 @@ void removeElement(ArrayList* list, void* ele);
 
 ```c
 // 获取第index的ele
-void* get(const ArrayList* list, int index);
+void* alGet(const ArrayList* list, int index);
 ```
 
 #### 描述
@@ -132,7 +132,7 @@ void* get(const ArrayList* list, int index);
 
 ```c
 // 获取真实大小
-int getSize(const ArrayList* list);
+int alGetSize(const ArrayList* list);
 ```
 
 #### 描述
