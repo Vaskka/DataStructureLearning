@@ -10,39 +10,42 @@
 #include "linkedlist/linkedlist.h"
 
 #include <stdio.h>
-struct A {
-    int a;
-    char* s;
-};
+
 
 int main(int argc, const char * argv[]) {
     // insert code here...
 
-    LinkedList * list = createList();
+    LinkedList * list1 = llCreateList();
+
+    LinkedList * list2 = llCreateList();
+
+    llAddLast(list1, (void*) 1);
+    llAddLast(list1, (void*) 2);
+    llAddLast(list1, (void*) 3);
 
 
-    for (int i = 0 ; i < 3; i++) {
-        int a = i;
-        /*
-        a.a = i;
+    llAddLast(list2, (void*) 4);
+    llAddLast(list2, (void*) 5);
+    llAddLast(list2, (void*) 6);
 
-        a.s = "hhh";
-        */
-        addFirst(list, (void*)&a);
+    llAppendLinkedList(list1, list2);
+    
+    llIteratorInit(list1);
+
+    while (llIteratorHasNext(list1)) {
+        printf("%d\n", (int)llIteratorNext(list1));
     }
-    
-    // while (getSize(list)) {
-    //    int curr = *((int*) getLast(list));
-    //     printf("%d\n", curr);
-    //     removeLastElement(list);
-    // }
 
-    printf("%d\n\n", *(int*)(list->head->value));
-        printf("%d\n\n", *(int*)(list->head->nextPointer->value));
-            printf("%d\n\n", *(int*)(list->head->nextPointer->nextPointer->value));
+    llIteratorClose(list1);
+    printf("\n\n");
+    printf("%d\n", list1->size);
+    printf("%d\n", list2->size);
     
-    printf("%d\n", list->size);
-    destory(list);
+
+
+
+    llDestory(list1);
+    llDestory(list2);
     
     return 0;
 }

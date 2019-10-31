@@ -1,17 +1,54 @@
 #include "linkedlist.h"
 
 
+/* 迭代器实现 */
+
+// 创建迭代器引用
+void llIteratorInit(LinkedList* original) {
+
+    original->curr = original->head;
+}
+
+// hasNext
+int llIteratorHasNext(const LinkedList* original) {
+    return original->curr == NULL ? 0 : 1;
+}
+
+// next获得内部用户数据
+void* llIteratorNext(LinkedList* original) {
+
+    if (!llIteratorHasNext(original)) {
+        raise_error("LinkedList iterator is invalid or closed.");
+        return NULL;
+    }
+
+    void* data = original->curr->value;
+    original->curr = original->curr->nextPointer;
+
+    return data;
+}
+
+// 关闭迭代器
+void llIteratorClose(LinkedList* original) {
+    original->curr = NULL;
+}
+
+
+/* 链表实现 */
+
+
 // 创建一个list
-LinkedList* createList() {
+LinkedList* llCreateList(void) {
     LinkedList* list = (LinkedList*) malloc(sizeof(LinkedList));
     list->size = 0;
     list->head = list->tail = NULL;
+    list->curr = NULL;
 
     return list;
 }
 
 // 增加一个element在尾部
-void addLast(LinkedList* list, void* ele) {
+void llAddLast(LinkedList* list, void* ele) {
 
     LinkedListItem* item = (LinkedListItem*) malloc(sizeof(LinkedListItem));
     item->value = ele;
@@ -36,7 +73,7 @@ void addLast(LinkedList* list, void* ele) {
 }
 
 // 增加一个element在首部
-void addFirst(LinkedList* list, void* ele) {
+void llAddFirst(LinkedList* list, void* ele) {
     LinkedListItem* item = (LinkedListItem*) malloc(sizeof(LinkedListItem));
     item->value = ele;
     item->prePointer = NULL;
@@ -61,25 +98,25 @@ void addFirst(LinkedList* list, void* ele) {
 }
 
 // 获取头部第一个元素的引用
-void* getFirst(const LinkedList* list) {
+void* llGetFirst(const LinkedList* list) {
     return list->head->value;
 }
 
 // 获取尾部第一个元素的引用
-void* getLast(const LinkedList* list) {
+void* llGetLast(const LinkedList* list) {
     return list->tail->value;
 }
 
 // 插入一个element, index < 0 等效于 index == 0, index >= size 等效于 index == size
-void insert(LinkedList* list, int index, void* ele) {
+void llInsert(LinkedList* list, int index, void* ele) {
 
     if (index <= 0) {
-        addFirst(list, ele);
+        llAddFirst(list, ele);
         return;
     }
 
     if (index >= list->size) {
-        addLast(list, ele);
+        llAddLast(list, ele);
         return;
     }
 
@@ -112,7 +149,7 @@ void insert(LinkedList* list, int index, void* ele) {
 }
 
 // 删除首部第一个element（不会回收内部用户数据所分配的内存，只会回收节点的内存，使用时需要注意内存泄漏问题）
-void removeFirstElement(LinkedList* list) {
+void llRemoveFirstElement(LinkedList* list) {
     if (list->size == 0) {
         return;
     }
@@ -128,7 +165,7 @@ void removeFirstElement(LinkedList* list) {
 }
 
 // 删除尾部第一个element（不会回收内部用户数据所分配的内存，只会回收节点的内存，使用时需要注意内存泄漏问题）
-void removeLastElement(LinkedList* list) {
+void llRemoveLastElement(LinkedList* list) {
     if (list->size == 0) {
         return;
     }
@@ -144,7 +181,7 @@ void removeLastElement(LinkedList* list) {
 }
 
 // 获取第index的ele, index < 0 等效于 index == 0, index >= size 等效于 index == size
-void* get(const LinkedList* list, int index) {
+void* llGet(const LinkedList* list, int index) {
     if (index < 0) {
         index = 0;
     }
@@ -165,26 +202,39 @@ void* get(const LinkedList* list, int index) {
 }
 
 // 获取真实大小
-int getSize(const LinkedList* list) {
+int llGetSize(const LinkedList* list) {
     return list->size;
 }
 
 // 销毁一个list（不会回收内部用户数据所分配的内存，只会回收节点的内存，使用时需要注意内存泄漏问题）
-void destory(LinkedList* list) {
+void llDestory(LinkedList* list) {
     while (list->size != 0) {
-        removeLastElement(list);
+        llRemoveLastElement(list);
     }
 
     free(list);
 }
 
 // 销毁list并释放内部用户数据
-void destoryAndFree(LinkedList* list) {
+void llDestoryAndFree(LinkedList* list) {
     while (list->size != 0) {
-        void* val = getLast(list);
+        void* val = llGetLast(list);
         free(val);
-        removeLastElement(list);
+        llRemoveLastElement(list);
     }
 
     free(list);
+}
+
+
+// 链表连接
+void llAppendLinkedList(LinkedList* original, LinkedList* appendList) {
+
+    llIteratorInit(appendList);
+
+    while (llIteratorHasNext(appendList)) {
+        llAddLast(original, llIteratorNext(appendList));
+    }
+
+    llIteratorClose(appendList);
 }

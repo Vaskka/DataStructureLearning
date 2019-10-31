@@ -30,44 +30,71 @@ typedef struct LinkedList {
 
     LinkedListItem* tail;
 
+    LinkedListItem* curr;
+
     int size;
     
 } LinkedList;
 
+
+
+/* 迭代器方法 */
+
+// 创建迭代器引用
+void llIteratorInit(LinkedList* original);
+
+// hasNext
+int llIteratorHasNext(const LinkedList* original);
+
+// next获得内部用户数据
+void* llIteratorNext(LinkedList* original);
+
+// 关闭迭代器
+void llIteratorClose(LinkedList* original);
+
+/* 链表方法 */
+
+
 // 创建一个list
-LinkedList* createList();
+LinkedList* llCreateList(void);
 
 // 增加一个element在尾部
-void addLast(LinkedList* list, void* ele);
+void llAddLast(LinkedList* list, void* ele);
 
 // 增加一个element在首部
-void addFirst(LinkedList* list, void* ele);
+void llAddFirst(LinkedList* list, void* ele);
 
 // 获取头部第一个元素的引用
-void* getFirst(const LinkedList* list);
+void* llGetFirst(const LinkedList* list);
 
 // 获取尾部第一个元素的引用
-void* getLast(const LinkedList* list);
+void* llGetLast(const LinkedList* list);
 
 // 插入一个element
-void insert(LinkedList* list, int index, void* ele);
+void llInsert(LinkedList* list, int index, void* ele);
 
 // 删除首部第一个element（不会回收内部用户数据所分配的内存，只会回收节点的内存，使用时需要注意内存泄漏问题）
-void removeFirstElement(LinkedList* list);
+void llRemoveFirstElement(LinkedList* list);
 
 // 删除尾部第一个element（不会回收内部用户数据所分配的内存，只会回收节点的内存，使用时需要注意内存泄漏问题）
-void removeLastElement(LinkedList* list);
+void llRemoveLastElement(LinkedList* list);
 
 // 获取第index的ele, index < 0 等效于 index == 0, index >= size 等效于 index == size
-void* get(const LinkedList* list, int index);
+void* llGet(const LinkedList* list, int index);
 
 // 获取真实大小
-int getSize(const LinkedList* list);
+int llGetSize(const LinkedList* list);
 
 // 销毁一个list, 不会回收内部用户数据所分配的内存，只会回收节点的内存，使用时需要注意内存泄漏问题）
-void destory(LinkedList* list);
+void llDestory(LinkedList* list);
 
 // 销毁list并释放内部用户数据
-void destoryAndFree(LinkedList* list);
+void llDestoryAndFree(LinkedList* list);
+
+
+// 链表连接
+void llAppendLinkedList(LinkedList* original, LinkedList* appendList);
+
+
 
 #endif /* linkedlist_h */

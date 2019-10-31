@@ -46,7 +46,7 @@ void _extendSize(ArrayList* list) {
 
 
 // 创建一个list
-ArrayList* createList(int initSize) {
+ArrayList* alCreateList(int initSize) {
     
     if (initSize <= 0) {
         initSize = DEFAULT_INIT_SIZE;
@@ -63,7 +63,7 @@ ArrayList* createList(int initSize) {
 }
 
 // 增加一个element
-void add(ArrayList* list, void* ele) {
+void alAdd(ArrayList* list, void* ele) {
    
     _extendSize(list);
     *(list->innerArray + list->size) = ele;
@@ -72,7 +72,7 @@ void add(ArrayList* list, void* ele) {
 }
 
 // 插入一个element
-void insert(ArrayList* list, int index, void* ele) {
+void alInsert(ArrayList* list, int index, void* ele) {
     _extendSize(list);
 
     if (index < 0 || index > list->size) {
@@ -92,7 +92,7 @@ void insert(ArrayList* list, int index, void* ele) {
 }
 
 // 删除index位置的element
-void removeIndexElement(ArrayList* list, int index) {
+void alRemoveIndexElement(ArrayList* list, int index) {
     if (index < 0 || index > list->size) {
         char error_msg[64];
         
@@ -109,7 +109,7 @@ void removeIndexElement(ArrayList* list, int index) {
 }
 
 // 删除搜索到的第一个element
-void removeElement(ArrayList* list, void* ele) {
+void alRemoveElement(ArrayList* list, void* ele) {
     for (int i = 0; i < list->size; i++) {
         if (*(list->innerArray + i) == ele) {
             for (int j = i; j < list->size - 1; j++) {
@@ -122,7 +122,7 @@ void removeElement(ArrayList* list, void* ele) {
 }
 
 // 获取第index的ele
-void* get(const ArrayList* list, int index) {
+void* alGet(const ArrayList* list, int index) {
         
     // out of range
     if (index < 0 || index >= list->size) {
@@ -137,12 +137,12 @@ void* get(const ArrayList* list, int index) {
 }
 
 // 获取size
-int getSize(const ArrayList* list) {
+int alGetSize(const ArrayList* list) {
     return list->size;
 }
 
 // 销毁一个list
-void destory(ArrayList* list) {
+void alDestory(ArrayList* list) {
     // 释放内部数组
     free(list->innerArray);
     
