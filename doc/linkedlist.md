@@ -28,6 +28,8 @@ typedef struct LinkedList {
 
     LinkedListItem* tail;
 
+    LinkedListItem* curr;
+
     int size;
     
 } LinkedList;
@@ -37,7 +39,7 @@ typedef struct LinkedList {
 
 ```cpp
 // 创建一个list
-LinkedList* createList(void);
+LinkedList* llCreateList(void);
 ```
 
 #### 描述
@@ -52,7 +54,7 @@ None
 
 ```cpp
 // 创建一个list
-void addLast(LinkedList* list, void* ele);s
+void llAddLast(LinkedList* list, void* ele);s
 ```
 
 #### 描述
@@ -67,7 +69,7 @@ void addLast(LinkedList* list, void* ele);s
 ### 头部增加新元素
 
 ```cpp
-void addFirst(LinkedList* list, void* ele);
+void llAddFirst(LinkedList* list, void* ele);
 ```
 
 #### 描述
@@ -82,7 +84,7 @@ void addFirst(LinkedList* list, void* ele);
 ### 获取头部元素引用
 
 ```cpp
-void* getFirst(const LinkedList* list);
+void* llGetFirst(const LinkedList* list);
 ```
 
 #### 描述
@@ -97,7 +99,7 @@ void* getFirst(const LinkedList* list);
 ### 获取尾部引用
 
 ```cpp
-void* getLast(const LinkedList* list);
+void* llGetLast(const LinkedList* list);
 ```
 
 #### 描述
@@ -111,7 +113,7 @@ void* getLast(const LinkedList* list);
 ### 插入一个元素
 
 ```cpp
-void insert(LinkedList* list, int index, void* ele);
+void llInsert(LinkedList* list, int index, void* ele);
 ```
 
 #### 描述
@@ -127,7 +129,7 @@ void insert(LinkedList* list, int index, void* ele);
 ### 删除首部元素
 
 ```cpp
-void removeFirstElement(LinkedList* list);
+void llRemoveFirstElement(LinkedList* list);
 ```
 
 #### 描述
@@ -141,7 +143,7 @@ void removeFirstElement(LinkedList* list);
 ### 删除尾部元素
 
 ```cpp
-void removeLastElement(LinkedList* list);
+void llRemoveLastElement(LinkedList* list);
 ```
 
 #### 描述
@@ -151,7 +153,7 @@ void removeLastElement(LinkedList* list);
 ### 获取第index个元素
 
 ```cpp
-void* get(const LinkedList* list, int index);
+void* llGet(const LinkedList* list, int index);
 ```
 
 #### 描述
@@ -166,7 +168,7 @@ void* get(const LinkedList* list, int index);
 ### 获取链表长度
 
 ```cpp
-void* get(const LinkedList* list, int index);
+void* llGetSize(const LinkedList* list);
 ```
 
 #### 描述
@@ -180,7 +182,7 @@ void* get(const LinkedList* list, int index);
 ### 销毁一个链表
 
 ```cpp
-void destory(LinkedList* list);
+void llDestory(LinkedList* list);
 ```
 
 #### 描述
@@ -194,7 +196,7 @@ void destory(LinkedList* list);
 ### 销毁链表并自动释放用户数据
 
 ```cpp
-void destoryAndFree(LinkedList* list);
+void llDestoryAndFree(LinkedList* list);
 ```
 
 #### 描述
@@ -204,3 +206,61 @@ void destoryAndFree(LinkedList* list);
 #### 参数
 
 + list: const LinkedList\* 链表引用
+
+
+### 迭代器方法：初始化迭代器
+
+```cpp
+void llIteratorInit(LinkedList* original);
+```
+
+#### 描述
+
+初始化迭代器所需要的标识。
+
+#### 参数
+
++ original: LinkedList\* 链表引用
+
+### 迭代器方法：hasNext
+
+```cpp
+int llIteratorHasNext(const LinkedList* original);
+```
+
+#### 描述
+
+探测当前迭代器是否仍有效
+
+#### 参数
+
++ original: const LinkedList\* 链表引用
+
+### 迭代器方法：next
+
+```cpp
+void* llIteratorNext(LinkedList* original);
+```
+
+#### 描述
+
+获得当前指向用户数据，并递增迭代器。
+
+#### 参数
+
++ original: LinkedList\* 链表引用
+
+### 迭代器方法：close
+
+```cpp
+void llIteratorClose(LinkedList* original);
+```
+
+#### 描述
+
+关闭迭代器，防止误用产生runtime error
+
+
+#### 参数
+
++ original: LinkedList\* 链表引用
